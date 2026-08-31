@@ -2,6 +2,8 @@ package com.crm.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -30,13 +32,7 @@ public class Followup {
     @Builder.Default
     @Column(name = "interaction_type", length = 20)
     private InteractionType interactionType = InteractionType.Call;
-
-    @Column(name = "scheduled_at")
-    private LocalDateTime scheduledAt;
-
-    @Column(name = "completed_at")
-    private LocalDateTime completedAt;
-
+    
     @Convert(converter = OutcomeConverter.class)
     @Column(length = 30)
     private Outcome outcome;
@@ -44,8 +40,14 @@ public class Followup {
     @Column(columnDefinition = "TEXT")
     private String remarks;
 
+    @Column(name = "scheduled_at")
+    private LocalDate scheduledAt;
+
+    @Column(name = "completed_at")
+    private LocalDate completedAt;
+
     @Column(name = "next_followup_at")
-    private LocalDateTime nextFollowupAt;
+    private LocalDate nextFollowupAt;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
