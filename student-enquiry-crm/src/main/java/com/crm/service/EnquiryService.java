@@ -1,28 +1,35 @@
 package com.crm.service;
 
+import com.crm.dto.request.EnquiryRequestDTO;
 import com.crm.dto.response.EnquiryResponseDTO;
 import com.crm.entity.Enquiry;
 import java.util.List;
 
 public interface EnquiryService {
 
-    // source ke hisaab se assignment logic yahi handle hogi
-    // Walk-in -> self-assign (loggedInCounsellorId se)
-    // Phone/Website -> counsellor null rahega jab tak Admin assign na kare
-    Enquiry createEnquiry(Enquiry enquiry, Integer createdByUserId);
+    // Assignment logic yahin handle hogi:
+    // Walk-in -> creator (Counsellor) khud assign ho jayega
+    // Phone Call / Website -> counsellor null rahega, Admin baad me assignCounsellor() se assign karega
+    EnquiryResponseDTO createEnquiry(EnquiryRequestDTO dto, Integer createdByUserId, String createdByRole);
 
-    Enquiry updateEnquiryStatus(Integer enquiryId, Enquiry.Status newStatus, Integer changedByUserId);
+    EnquiryResponseDTO updateEnquiryStatus(Integer enquiryId, Enquiry.Status newStatus);
 
-    Enquiry assignCounsellor(Integer enquiryId, Integer counsellorId);
+    // Admin only
+    EnquiryResponseDTO assignCounsellor(Integer enquiryId, Integer counsellorId);
 
-    Enquiry updatePriority(Integer enquiryId, Enquiry.Priority priority);
+    EnquiryResponseDTO updatePriority(Integer enquiryId, Enquiry.Priority priority);
 
-    Enquiry getEnquiryById(Integer enquiryId);
+    // Ownership check andar hoga - Counsellor sirf apni enquiry dekh sake
+    EnquiryResponseDTO getEnquiryById(Integer enquiryId);
 
     List<EnquiryResponseDTO> getEnquiriesByCounsellor(Integer counsellorId);
 
+    List<EnquiryResponseDTO> getMyEnquiries(); // logged-in Counsellor ki apni list
+
+    // Admin only
     List<EnquiryResponseDTO> getUnassignedEnquiries();
 
+    // Admin only
     List<EnquiryResponseDTO> getAllEnquiries();
 
     List<EnquiryResponseDTO> getEnquiriesByStatus(Enquiry.Status status);
