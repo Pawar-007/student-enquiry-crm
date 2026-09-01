@@ -1,18 +1,18 @@
 package com.crm.service;
 
 import com.crm.dto.response.EnrollmentResponseDTO;
+import com.crm.dto.request.EnrollmentRequestDTO;
 import com.crm.entity.Enrollment;
 import java.util.List;
 
 public interface EnrollmentService {
 
-    // admission confirm hone par: Student find/create + naya Enrollment banega + Enquiry status update hoga
-    Enrollment confirmAdmission(Integer enquiryId, Integer courseId, Integer counsellorId,
-                                 java.math.BigDecimal totalFees, Integer batchId);
+    // Poora conversion flow ek transaction mein: Student find/create + Enrollment banega + Enquiry status update hoga
+    EnrollmentResponseDTO confirmAdmission(EnrollmentRequestDTO dto);
 
-    Enrollment updateEnrollmentStatus(Integer enrollmentId, Enrollment.EnrollmentStatus status);
+    EnrollmentResponseDTO updateEnrollmentStatus(Integer enrollmentId, Enrollment.EnrollmentStatus status);
 
     List<EnrollmentResponseDTO> getEnrollmentsByStudent(Integer studentId);
 
-    Enrollment getEnrollmentById(Integer enrollmentId);
+    EnrollmentResponseDTO getEnrollmentById(Integer enrollmentId);
 }
