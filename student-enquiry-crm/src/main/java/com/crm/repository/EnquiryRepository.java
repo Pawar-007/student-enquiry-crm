@@ -35,4 +35,6 @@ public interface EnquiryRepository extends JpaRepository<Enquiry, Integer> {
     // Total enquiries today
     @Query("SELECT COUNT(e) FROM Enquiry e WHERE FUNCTION('DATE', e.createdAt) = CURRENT_DATE")
     Long countTodaysEnquiries();
+    
+    long countByStatus(Enquiry.Status status);
 }

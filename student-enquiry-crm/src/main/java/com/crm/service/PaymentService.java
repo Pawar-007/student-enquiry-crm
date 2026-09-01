@@ -1,13 +1,13 @@
 package com.crm.service;
 
+import com.crm.dto.request.PaymentRequestDTO;
 import com.crm.dto.response.PaymentResponseDTO;
-import com.crm.entity.Payment;
 import java.math.BigDecimal;
 import java.util.List;
 
 public interface PaymentService {
 
-    PaymentResponseDTO addPayment(Payment payment);
+    PaymentResponseDTO addPayment(PaymentRequestDTO dto);
 
     List<PaymentResponseDTO> getPaymentsByEnrollment(Integer enrollmentId);
 

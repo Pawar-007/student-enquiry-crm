@@ -1,16 +1,12 @@
 package com.crm.service;
 
+import com.crm.dto.request.CourseModuleRequestDTO;
 import com.crm.dto.response.CourseModuleResponseDTO;
-import com.crm.entity.CourseModule;
 import java.util.List;
 
 public interface CourseModuleService {
-
-    CourseModule addModule(CourseModule module);
-
-    CourseModule updateModule(Integer moduleId, CourseModule module);
-
+    CourseModuleResponseDTO addModule(CourseModuleRequestDTO dto);
+    CourseModuleResponseDTO updateModule(Integer moduleId, CourseModuleRequestDTO dto);
     void deleteModule(Integer moduleId);
-
     List<CourseModuleResponseDTO> getModulesByCourse(Integer courseId);
 }
