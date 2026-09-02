@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.core.Ordered;
 
 @Configuration
 public class FilterConfig {
@@ -16,8 +17,8 @@ public class FilterConfig {
     public FilterRegistrationBean<JwtAuthFilter> jwtFilterRegistration() {
         FilterRegistrationBean<JwtAuthFilter> registrationBean = new FilterRegistrationBean<>();
         registrationBean.setFilter(jwtAuthFilter);
-        registrationBean.addUrlPatterns("/api/*");   // saari /api/ requests is filter se guzrengi
-        registrationBean.setOrder(1);
+        registrationBean.addUrlPatterns("/api/*");
+        registrationBean.setOrder(Ordered.HIGHEST_PRECEDENCE + 10);  // CorsFilter ke baad chale
         return registrationBean;
     }
 }

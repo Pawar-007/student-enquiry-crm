@@ -32,6 +32,7 @@ public class AuthController {
         User user = userRepository.findByEmail(dto.getEmail())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid email or password"));
 
+        
         if (user.getStatus() == User.UserStatus.Blocked) {
             throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Account is blocked");
         }
@@ -41,7 +42,7 @@ public class AuthController {
         }
 
         String token = jwtService.generateToken(user);
-
+        
         LoginResponseDTO response = LoginResponseDTO.builder()
                 .token(token)
                 .email(user.getEmail())

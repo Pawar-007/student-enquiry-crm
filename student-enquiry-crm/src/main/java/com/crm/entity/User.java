@@ -62,4 +62,12 @@ public class User {
 
     public enum Role { Admin, Counsellor }
     public enum UserStatus { Active, Blocked }
+	@Override
+	public String toString() {
+		return "User [userId=" + userId + ", name=" + name + ", email=" + email + ", password=" + password + ", role="
+				+ role + ", mobile=" + mobile + ", status=" + status + ", createdAt=" + createdAt + ", updatedAt="
+				+ updatedAt + ", updatedBy=" + updatedBy + "]";
+	}
+    
+    
 }

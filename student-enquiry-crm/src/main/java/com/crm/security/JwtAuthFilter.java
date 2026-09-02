@@ -20,13 +20,27 @@ public class JwtAuthFilter implements Filter {
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
             throws IOException, ServletException {
 
+    	    
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
 
+        System.out.println(
+                "JWT FILTER CALLED: "
+                + httpRequest.getMethod()
+                + " "
+                + httpRequest.getRequestURI()
+            );
+        
+        if ("OPTIONS".equalsIgnoreCase(httpRequest.getMethod())) {
+            chain.doFilter(request, response);
+            return;
+        }
+
+        
         String path = httpRequest.getRequestURI();
 
         // Login endpoint ke liye token check skip karo
-        if (path.startsWith("/api/auth/")) {
+        if (path.startsWith("/api/auth/") || path.startsWith("/api/public/")) {
             chain.doFilter(request, response);
             return;
         }

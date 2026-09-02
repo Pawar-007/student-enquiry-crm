@@ -14,6 +14,11 @@ public class WebConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(roleCheckInterceptor);
+
+        System.out.println("ROLE INTERCEPTOR REGISTERED");
+
+        registry.addInterceptor(roleCheckInterceptor)
+                .addPathPatterns("/api/**")
+                .excludePathPatterns("/api/auth/**");
     }
 }

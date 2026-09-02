@@ -1,6 +1,7 @@
 package com.crm.service.impl;
 
 import com.crm.dto.request.EnquiryRequestDTO;
+import com.crm.dto.request.PublicEnquiryRequestDTO;
 import com.crm.dto.response.EnquiryResponseDTO;
 import com.crm.entity.Course;
 import com.crm.entity.Enquiry;
@@ -182,4 +183,41 @@ public class EnquiryServiceImpl implements EnquiryService {
         }
         return enquiry;
     }
+
+ // EnquiryServiceImpl mein add karo
+    @Override
+    public EnquiryResponseDTO createPublicEnquiry(PublicEnquiryRequestDTO dto) {
+
+        if (dto.getFullName() == null || dto.getFullName().isBlank()) {
+            throw new IllegalArgumentException("Full name is required");
+        }
+        if (dto.getMobileNumber() == null || dto.getMobileNumber().isBlank()) {
+            throw new IllegalArgumentException("Mobile number is required");
+        }
+
+        Course course = null;
+        if (dto.getCourseId() != null) {
+            course = courseRepository.findById(dto.getCourseId())
+                    .orElseThrow(() -> new RuntimeException("Course not found with id: " + dto.getCourseId()));
+        }
+
+        Enquiry enquiry = Enquiry.builder()
+                .fullName(dto.getFullName())
+                .mobileNumber(dto.getMobileNumber())
+                .alternateMobile(dto.getAlternateMobile())
+                .email(dto.getEmail())
+                .city(dto.getCity())
+                .course(course)
+                .courseMode(dto.getCourseMode())
+                .budgetRange(dto.getBudgetRange())
+                .enquirySource(Enquiry.EnquirySource.Website)   // server-forced, client control nahi kar sakta
+                .priority(Enquiry.Priority.Warm)                // default
+                .counsellor(null)                               // Admin baad me assign karega
+                .build();
+
+        Enquiry saved = enquiryRepository.save(enquiry);
+        return EnquiryResponseDTO.fromEntity(saved);
+    }
+    
+    
 }

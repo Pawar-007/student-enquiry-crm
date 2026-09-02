@@ -1,6 +1,7 @@
 package com.crm.service;
 
 import com.crm.dto.request.EnquiryRequestDTO;
+import com.crm.dto.request.PublicEnquiryRequestDTO;
 import com.crm.dto.response.EnquiryResponseDTO;
 import com.crm.entity.Enquiry;
 import java.util.List;
@@ -33,4 +34,6 @@ public interface EnquiryService {
     List<EnquiryResponseDTO> getAllEnquiries();
 
     List<EnquiryResponseDTO> getEnquiriesByStatus(Enquiry.Status status);
+    
+    EnquiryResponseDTO createPublicEnquiry(PublicEnquiryRequestDTO dto);
 }
