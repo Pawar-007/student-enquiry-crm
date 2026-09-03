@@ -15,8 +15,10 @@ export function AuthProvider({ children }) {
     setLoading(true)
     try {
       const data = await authApi.login(email, password)
+      console.log("TOKEN BEFORE SAVE:", data.token)
       const nextUser = { email: data.email, role: data.role }
       localStorage.setItem('crm_token', data.token)
+      console.log("TOKEN AFTER SAVE:", localStorage.getItem('crm_token'))
       localStorage.setItem('crm_user', JSON.stringify(nextUser))
       setUser(nextUser)
       return nextUser

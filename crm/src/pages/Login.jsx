@@ -29,7 +29,9 @@ export default function Login() {
     setApiError('')
     try {
       const user = await login(values.email, values.password)
+      console.log(user)
       const redirectTo = location.state?.from?.pathname
+      console.log("redirect ",redirectTo);
       if (redirectTo) navigate(redirectTo, { replace: true })
       else navigate('/portal', { replace: true })
     } catch (err) {
