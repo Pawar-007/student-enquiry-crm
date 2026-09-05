@@ -89,6 +89,7 @@ public class EnquiryController {
     @GetMapping
     @RequireRole("Admin")
     public ResponseEntity<List<EnquiryResponseDTO>> getAllEnquiries() {
+    	    System.out.println("request come");
         return ResponseEntity.ok(enquiryService.getAllEnquiries());
     }
 

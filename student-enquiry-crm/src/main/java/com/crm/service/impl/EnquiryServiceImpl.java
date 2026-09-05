@@ -142,20 +142,21 @@ public class EnquiryServiceImpl implements EnquiryService {
 
     @Override
     public List<EnquiryResponseDTO> getUnassignedEnquiries() {
-        // dono source (Phone_Call, Website) ke unassigned enquiries
-        return enquiryRepository.findByEnquirySourceAndCounsellorIsNull(Enquiry.EnquirySource.Phone_Call)
+
+        return enquiryRepository.findByCounsellorIsNull()
                 .stream()
                 .map(EnquiryResponseDTO::fromEntity)
                 .collect(Collectors.toList());
-        // Note: Website source ke liye alag call chahiye ho to repository method extend karo
     }
 
     @Override
     public List<EnquiryResponseDTO> getAllEnquiries() {
-        return enquiryRepository.findAll()
-                .stream()
-                .map(EnquiryResponseDTO::fromEntity)
-                .collect(Collectors.toList());
+    	    System.out.print("request come to service");
+    	    List<EnquiryResponseDTO> li=enquiryRepository.findAll()
+                    .stream()
+                    .map(EnquiryResponseDTO::fromEntity)
+                    .collect(Collectors.toList());
+        return li;
     }
 
     @Override

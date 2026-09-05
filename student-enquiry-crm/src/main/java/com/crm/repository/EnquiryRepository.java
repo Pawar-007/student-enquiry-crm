@@ -37,4 +37,6 @@ public interface EnquiryRepository extends JpaRepository<Enquiry, Integer> {
     Long countTodaysEnquiries();
     
     long countByStatus(Enquiry.Status status);
+    
+    List<Enquiry> findByCounsellorIsNull();
 }

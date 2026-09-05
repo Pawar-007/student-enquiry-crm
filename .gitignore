@@ -1,33 +1,46 @@
+# ===================================================
+# Eclipse Workspace Metadata
+# ===================================================
 /.metadata/
-# Maven
-target/
-!.mvn/wrapper/maven-wrapper.jar
+
+# ===================================================
+# Backend (student-enquiry-crm) — Maven
+# ===================================================
+student-enquiry-crm/target/
+!student-enquiry-crm/.mvn/wrapper/maven-wrapper.jar
+
+# Spring Boot - application configuration (sensitive: DB password, JWT secret)
+student-enquiry-crm/src/main/resources/application.properties
+student-enquiry-crm/src/main/resources/application.yml
+student-enquiry-crm/src/main/resources/application-*.properties
+student-enquiry-crm/src/main/resources/application-*.yml
+
+# ===================================================
+# Frontend (crm-frontend) — Node/Vite
+# ===================================================
+crm-frontend/node_modules/
+crm-frontend/dist/
+crm-frontend/.env
+crm-frontend/.env.local
+crm-frontend/.env.*.local
 
 **/node_modules/
 
-# Eclipse
+
 .classpath
 .project
 .settings/
 .springBeans
 .sts4-cache/
 
-# IntelliJ
+
 .idea/
 *.iml
 
-# VS Code
+
 .vscode/
 
-# Spring Boot - application configuration
-application.properties
-application.yml
-application-*.properties
-application-*.yml
-
-# Logs
 *.log
 
-# OS files
 .DS_Store
 Thumbs.db
